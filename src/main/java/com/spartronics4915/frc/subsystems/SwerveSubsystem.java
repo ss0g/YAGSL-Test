@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
+import swervelib.telemetry.SwerveDriveTelemetry;
+import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
 import static com.spartronics4915.frc.Constants.Swerve.kMaxSpeed;
 import static com.spartronics4915.frc.Constants.Swerve.kMaxAngularSpeed;
@@ -23,10 +25,12 @@ public final class SwerveSubsystem extends SubsystemBase {
 
     public SwerveSubsystem(CommandXboxController driverController) {
         mDriverController = driverController;
+        SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
         try {
             mSwerveDrive = new SwerveParser(new File(Filesystem.getDeployDirectory(), "swerve")).createSwerveDrive(kMaxSpeed);
         } catch (IOException err) {
             err.printStackTrace(System.err);
+            System.exit(-1);
         }
     }
 
