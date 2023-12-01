@@ -19,6 +19,8 @@ import static com.spartronics4915.frc.Constants.Swerve.kSpeedLimit;
 import static com.spartronics4915.frc.Constants.Swerve.kMaxAngularSpeed;
 import static com.spartronics4915.frc.Constants.Swerve.kDeadband;
 import static com.spartronics4915.frc.Constants.Swerve.kResponseCurveExponent;
+import static com.spartronics4915.frc.Constants.Swerve.kDriveMotorConversionFactor;
+import static com.spartronics4915.frc.Constants.Swerve.kAngleMotorConversionFactor;
 
 public final class SwerveSubsystem extends SubsystemBase {
     private SwerveDrive mSwerveDrive;
@@ -28,7 +30,9 @@ public final class SwerveSubsystem extends SubsystemBase {
         mDriverController = driverController;
         SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
         try {
-            mSwerveDrive = new SwerveParser(new File(Filesystem.getDeployDirectory(), "swerve")).createSwerveDrive(kMaxSpeed);
+            mSwerveDrive = new SwerveParser(new File(Filesystem.getDeployDirectory(), "swerve")).createSwerveDrive(
+                kMaxSpeed, kAngleMotorConversionFactor, kDriveMotorConversionFactor
+            );
         } catch (IOException err) {
             err.printStackTrace(System.err);
             System.exit(-1);
