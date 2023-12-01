@@ -9,7 +9,8 @@ public final class Constants {
 
         public static final double kRadius = Math.hypot(kWheelbase / 2, kTrackWidth / 2);
 
-        public static final double kMaxSpeed = 1; // Units.feetToMeters(14.5);
+        public static final double kMaxSpeed = Units.feetToMeters(14.5);
+        public static final double kSpeedLimit = kMaxSpeed * 0.3;
         public static final double kMaxAngularSpeed = kMaxSpeed / kRadius;
 
         public static final double kDeadband = 0.05;
