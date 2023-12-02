@@ -4,6 +4,8 @@
 
 package com.spartronics4915.frc;
 
+import com.pathplanner.lib.auto.SwerveAutoBuilder;
+import com.spartronics4915.frc.commands.auto.GenerateAutoCommands;
 import com.spartronics4915.frc.subsystems.SwerveSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,15 +16,18 @@ public class RobotContainer {
   private final CommandXboxController mDriverController = new CommandXboxController(0);
 
   private final SwerveSubsystem mSwerveSubsystem = new SwerveSubsystem(mDriverController);
-
+  private final Command autoCommand;
   public RobotContainer() {
     configureBindings();
+
+    autoCommand = GenerateAutoCommands.followSquarePath(mSwerveSubsystem);
+
   }
 
   private void configureBindings() {}
 
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    return autoCommand;
   }
 
   public CommandXboxController getDriverController() {
